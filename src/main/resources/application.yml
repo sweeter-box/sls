@@ -1,0 +1,74 @@
+server:
+  port: 80
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sls
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+    jedis:
+      pool:
+        max-idle: 20
+        max-active: 32
+        #max-wait: 100
+        min-idle: 10
+  cache:
+    redis:
+      timeToLive: 5m   # ns - 纳秒  us - 微秒 ms - 毫秒s - 秒  m - 分 h - 时 d - 天 无单位为则一个 long 代表的时间为毫秒
+      useKeyPrefix: true
+      keyPrefix: 'slsCache'
+
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      url: jdbc:log4jdbc:mysql://192.168.3.5:3306/sls?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+      username: root
+      password: root
+      druid:
+        # 初始化配置
+        initial-size: 3
+        # 最小连接数
+        min-idle: 3
+        # 最大连接数
+        max-active: 15
+        # 获取连接超时时间
+        max-wait: 5000
+        # 连接有效性检测时间
+        time-between-eviction-runs-millis: 90000
+        # 最大空闲时间
+        min-evictable-idle-time-millis: 1800000
+        test-while-idle: true
+        test-on-borrow: true  #获取Connection对象时检测其可用性
+        test-on-return: false  #是否在归还到池中前进行检验
+
+        validation-query: select 1
+        # 配置监控统计拦截的filters
+        filters: stat
+        stat-view-servlet:
+          url-pattern: /druid/*
+          reset-enable: false
+        web-stat-filter:
+          url-pattern: /*
+          exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        hbm2ddl:
+          auto: update
+    show-sql: true
+
+
+# 静态资源代理
+staticProxy:
+  resources:
+    #配置类路径地址
+   '[/ui/**]': classpath:ui/

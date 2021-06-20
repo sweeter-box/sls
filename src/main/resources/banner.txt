@@ -1,0 +1,12 @@
+ ${AnsiColor.BRIGHT_YELLOW}
+                                              _____ _       _____
+                                             / ____| |     / ____|
+                                            | (___ | |    | (___
+                                             \___ \| |     \___ \
+                                             ____) | |____ ____) |
+                                            |_____/|______|_____/
+
+
+ ${AnsiColor.BLUE}
+      ::: SLS 短链接服务(Short Link Service)  (version:1.0)      ::: Spring-Boot ${spring-boot.version}
+ ${AnsiColor.BRIGHT_BLACK}
