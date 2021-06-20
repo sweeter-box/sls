@@ -10,12 +10,6 @@ spring:
     port: 6379
     password:
     database: 0
-    jedis:
-      pool:
-        max-idle: 20
-        max-active: 32
-        #max-wait: 100
-        min-idle: 10
   cache:
     redis:
       timeToLive: 5m   # ns - 纳秒  us - 微秒 ms - 毫秒s - 秒  m - 分 h - 时 d - 天 无单位为则一个 long 代表的时间为毫秒
