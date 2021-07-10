@@ -19,9 +19,7 @@ pid_file=$work_dir$name.pid
 
 # 启动进程
 start_(){
-        # do something
-        nohup 命令  >> $name.log 2>&1 &
-        nohup java $JAVA_OPTS -jar  $work_dir'sls-1.0.jar' --spring.profiles.active=deploy >> $name.log 2>&1 &
+        nohup java $JAVA_OPTS -jar -Dloader.path=lib  $work_dir'sls.jar' --spring.profiles.active=deploy >> $name.log 2>&1 &
         pid=$!
         echo "Start Java Service = $pid";
         echo $pid > $pid_file
@@ -29,7 +27,6 @@ start_(){
 
 # 停止进程
 stop_(){
-        # do something
         echo "Stop Java Service";
         kill -15  `cat $pid_file` &> /dev/null
 }

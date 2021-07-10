@@ -88,8 +88,20 @@
 - 2.对发号器进行分组，可以把多个发号器分为一组，也可以一个发号器为一组，每个发号器组分配一个十进制id
 - 3.发号器组id的62编码+"."+编号的62进制编码组成一个短链，如：1c.AbC1,看起来非常像阿里的短链是不是？:smile:
 
-
-
+## 打包部署
+- 配置文件、jar包分离打包
+```text
+mvn clean package
+```
+- 启动服务
+  - window:
+   ```text
+    server.bat
+    ```
+  - linux 
+  ```shell script
+   sh server.sh start
+  ```
 ## 如何使用
 - 体验地址：
 

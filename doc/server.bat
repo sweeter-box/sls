@@ -1,2 +1,2 @@
-java -jar sls-1.0.jar
+java -jar -Dloader.path=lib sls.jar --spring.profiles.active=deploy
 pause
