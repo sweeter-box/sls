@@ -1,5 +1,6 @@
 package link.s.sls.access;
 
+import link.s.sls.utils.IpUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ public class AccessLogServiceImpl implements AccessLogService {
     public void save(AccessLog accessLog) {
         AccessLogEntity entity = new AccessLogEntity();
         BeanUtils.copyProperties(accessLog, entity);
+        entity.setIp(IpUtils.ipv4ToLong(accessLog.getIp()));
         accessLogRepository.save(entity);
     }
 }

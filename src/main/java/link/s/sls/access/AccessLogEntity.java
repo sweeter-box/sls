@@ -28,8 +28,8 @@ import java.time.LocalDateTime;
 @Entity
 public class AccessLogEntity extends IdEntity {
 
-    @Column(columnDefinition ="varchar(16) COMMENT '访问ip'" )
-    private String ip;
+    @Column(columnDefinition ="bigint COMMENT '访问ip'" )
+    private Long ip;
 
     @Column(columnDefinition ="varchar(7) COMMENT '映射码'" )
     private String code;

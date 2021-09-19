@@ -86,4 +86,75 @@ public final class IpUtils {
         }
         return "";
     }
+
+    /**
+     * Convert ipv4 address to Long Number by https://mkyong.com/java/java-convert-ip-address-to-decimal-number/
+     * @param ipv4
+     * @return
+     */
+    public static Long ipv4ToLong(String ipv4) {
+        String[] ipv4InArray = ipv4.split("\\.");
+        long result = 0;
+        for (int i = 0; i < ipv4InArray.length; i++) {
+            int power = 3 - i;
+            int ip = Integer.parseInt(ipv4InArray[i]);
+            result += ip * Math.pow(256, power);
+        }
+        return result;
+    }
+
+    public static long ipv4ToLong2(String ipv4) {
+        long result = 0;
+        String[] ipAddressInArray = ipv4.split("\\.");
+        for (int i = 3; i >= 0; i--) {
+            long ip = Long.parseLong(ipAddressInArray[3 - i]);
+            // left shifting 24,16,8,0 and bitwise OR
+            // 1. 192 << 24
+            // 1. 168 << 16
+            // 1. 1 << 8
+            // 1. 2 << 0
+            result |= ip << (i * 8);
+
+        }
+
+        return result;
+    }
+
+    /**
+     *  Convert ipv4 Long Number address to ipv4 String
+     * @param ipv4
+     * @return
+     */
+    public static String longToIpv4(long ipv4) {
+        StringBuilder result = new StringBuilder(15);
+        for (int i = 0; i < 4; i++) {
+            result.insert(0,Long.toString(ipv4 & 0xff));
+            if (i < 3) {
+                result.insert(0,'.');
+            }
+            ipv4 = ipv4 >> 8;
+        }
+        return result.toString();
+    }
+
+    public static String longToIpv42(long ip) {
+        StringBuilder sb = new StringBuilder(15);
+        for (int i = 0; i < 4; i++) {
+            // 1. 2
+            // 2. 1
+            // 3. 168
+            // 4. 192
+            sb.insert(0, Long.toString(ip & 0xff));
+            if (i < 3) {
+                sb.insert(0, '.');
+            }
+            // 1. 192.168.1.2
+            // 2. 192.168.1
+            // 3. 192.168
+            // 4. 192
+            ip = ip >> 8;
+        }
+        return sb.toString();
+    }
+
 }
