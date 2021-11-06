@@ -28,8 +28,10 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(columnDefinition ="varchar(8) COMMENT 'appKey'",nullable = false)
     private String appKey;
 
+    @Column(columnDefinition ="varchar(16) COMMENT '密匙'",nullable = false)
     private String appSecret;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
