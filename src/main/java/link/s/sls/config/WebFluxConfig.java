@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
@@ -27,10 +27,7 @@ import java.io.IOException;
 public class WebFluxConfig implements WebFluxConfigurer {
 
     @Autowired
-    private ResourceProperties resourceProperties;
-
-   // @Autowired
-    //private WebFluxProperties webFluxProperties;
+    private WebProperties webProperties;
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
@@ -42,7 +39,8 @@ public class WebFluxConfig implements WebFluxConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        CacheControl cacheControl = CacheControl.maxAge(resourceProperties.getCache().getCachecontrol().getMaxAge());
+        WebProperties.Resources resources = webProperties.getResources();
+        CacheControl cacheControl = CacheControl.maxAge(resources.getCache().getCachecontrol().getMaxAge());
     }
 
     @Override
