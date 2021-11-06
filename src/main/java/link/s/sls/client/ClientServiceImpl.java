@@ -44,9 +44,13 @@ public class ClientServiceImpl implements ClientService {
         if (clientOpt.isPresent()) {
             ClientEntity client = clientOpt.get();
             if (StringUtils.equals(client.getAppSecret(), appSecret)) {
-                client.setAppSecret(TokenUtils.generateToken(16));
+                client.setAppSecret(TokenUtils.generateToken(64));
                 clientRepository.save(client);
+            }else {
+                throw new RuntimeException("密匙不匹配");
             }
+        }else {
+            throw new RuntimeException("该appKey不存在");
         }
 
     }

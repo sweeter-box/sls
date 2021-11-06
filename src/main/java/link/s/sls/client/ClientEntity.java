@@ -31,7 +31,7 @@ public class ClientEntity {
     @Column(columnDefinition ="varchar(8) COMMENT 'appKey'",nullable = false)
     private String appKey;
 
-    @Column(columnDefinition ="varchar(16) COMMENT '密匙'",nullable = false)
+    @Column(columnDefinition ="varchar(64) COMMENT '密匙'",nullable = false)
     private String appSecret;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
